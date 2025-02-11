@@ -1,0 +1,60 @@
+{@ $ai = $mh_folding_panel; }
+<load target="css/style.css" />
+
+<!--@if($ai->toggle_form == 'H')-->
+	<div class="mh-folding-panel-wrapper">
+		<details class="mh-folding-panel" <!--@if($ai->panel_on =='Y')-->open<!--@end-->>
+			<summary class="mh-folding-header">
+				<span></span>
+			</summary>
+			<div class="mh-folding-content">{$ai->content}</div>
+		</details>
+	</div>
+<!--@else-->
+	<div class="mh-folding-panel-wrapper">
+		<div class="mh-folding-panel">
+			<div class="mh-folding-header" onclick="MhFoldingPanel.toggle()"></div>
+				<div id="mh-folding-content" class="mh-folding-content">
+					{$ai->content}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		var MhFoldingPanel = {
+			toggle: function() {
+				var content = document.getElementById('mh-folding-content');
+				var header = document.querySelector('.mh-folding-header');
+				
+				if (content && header) {
+					var isHidden = content.style.display === 'none';
+					content.style.display = isHidden ? 'block' : 'none';
+					
+					// 화살표 방향 변경
+					header.innerHTML = isHidden ? '▲ {$ai->toggle2_text}' : '▼ {$ai->toggle1_text}';
+				}
+			}
+		};
+
+		// 초기 상태 설정
+		document.addEventListener('DOMContentLoaded', function() {
+			var content = document.getElementById('mh-folding-content');
+			var header = document.querySelector('.mh-folding-header');
+			
+			if (content && header) {
+				content.style.display = '<!--@if($ai->panel_on =='Y')-->block<!--@else-->none<!--@end-->';
+				header.innerHTML = '▼ {$ai->toggle1_text}';
+			}
+		});
+	</script>
+<!--@end-->
+
+<style type="text/css">
+	.mh-folding-panel-wrapper summary::marker{ content: "+ {$ai->toggle1_text} "; color:#fff; }
+	.mh-folding-panel-wrapper details[open] summary::marker { content: "️▲ {$ai->toggle2_text} "; color:#fff; }
+	.mh-folding-content { background:{$ai->top_panel_bcolor}; color:{$ai->top_panel_color}; font-size:{$ai->top_panel_size}; }
+	.mh-folding-content a,
+	.mh-folding-content span,
+	.mh-folding-content div { font-size:{$ai->top_panel_size}; }
+</style>
