@@ -5,11 +5,25 @@
 	<div class="mh-folding-panel-wrapper">
 		<details class="mh-folding-panel" <!--@if($ai->panel_on =='Y')-->open<!--@end-->>
 			<summary class="mh-folding-header">
-				<span></span>
+				<span>{$ai->toggle1_text}</span>
 			</summary>
 			<div class="mh-folding-content">{$ai->content}</div>
 		</details>
 	</div>
+
+	<style>
+		.mh-folding-panel-wrapper summary.mh-folding-header::-webkit-details-marker { display:none; }
+		.mh-folding-panel-wrapper summary.mh-folding-header { display:block; }
+		.mh-folding-panel-wrapper summary.mh-folding-header { position:relative; padding-left:1.2em; cursor:pointer; }
+		.mh-folding-panel-wrapper summary.mh-folding-header::before { content:""; position:absolute; border-top:0.5em solid transparent; border-bottom:0.5em solid transparent; border-left:0.75em solid #ff6600; top:0.8em; left:0; transition:.25s transform; }
+		.mh-folding-panel-wrapper details[open] summary:before { transform:rotateZ(450deg); }
+		.mh-folding-panel-wrapper details[open] > summary::-webkit-details-marker { transform:rotate3d(0, 0, 1, 180deg);}
+		.mh-folding-panel-wrapper details[open] > summary ~ * { animation:reveal 2s;}
+		@keyframes reveal {
+			from { opacity:0; transform:translate3d(0, -20px, 0); }
+			to { opacity:1; transform:translate3d(0, 0, 0); }
+		}
+	</style>
 <!--@else-->
 	<div class="mh-folding-panel-wrapper">
 		<div class="mh-folding-panel">
@@ -23,16 +37,16 @@
 
 	<script>
 		var MhFoldingPanel = {
-			toggle: function() {
+			toggle:function() {
 				var content = document.getElementById('mh-folding-content');
 				var header = document.querySelector('.mh-folding-header');
 				
 				if (content && header) {
 					var isHidden = content.style.display === 'none';
-					content.style.display = isHidden ? 'block' : 'none';
+					content.style.display = isHidden ? 'block' :'none';
 					
 					// 화살표 방향 변경
-					header.innerHTML = isHidden ? '▲ {$ai->toggle2_text}' : '▼ {$ai->toggle1_text}';
+					header.innerHTML = isHidden ? '▲ {$ai->toggle2_text}' :'▼ {$ai->toggle1_text}';
 				}
 			}
 		};
@@ -51,8 +65,6 @@
 <!--@end-->
 
 <style type="text/css">
-	.mh-folding-panel-wrapper summary::marker{ content: "+ {$ai->toggle1_text} "; color:#fff; }
-	.mh-folding-panel-wrapper details[open] summary::marker { content: "️▲ {$ai->toggle2_text} "; color:#fff; }
 	.mh-folding-content { background:{$ai->top_panel_bcolor}; color:{$ai->top_panel_color}; font-size:{$ai->top_panel_size}; }
 	.mh-folding-content a,
 	.mh-folding-content span,

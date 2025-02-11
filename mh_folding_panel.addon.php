@@ -3,7 +3,7 @@
 	 * Mh Folding Panel Addon
 	 * @author 80san <80san@moonhouse.co.kr>
 	 * @license GPL-3.0-or-later
-	 * @link https://moonhouse.co.kr
+	 * @link https://moonhouse.co.kr/xemy/597524
 	 */
 
 	if (!defined('RX_VERSION')) {
@@ -61,6 +61,8 @@
 	// 본문 시작 부분에 삽입 (여러 패턴 시도)
 	$patterns = array(
 		'/<div[^>]*class="[^"]*board[^"]*"[^>]*>/i',
+		'/<div[^>]*class="[^"]*mhfold[^"]*"[^>]*>/i',
+		'/<form[^>]*class="[^"]*mhfold[^"]*"[^>]*>/i',
 	);
 
 	foreach ($patterns as $pattern) {
