@@ -72,6 +72,16 @@
 			<title>판넬 Mid 1 출력내용</title>
 			<description>판넬 mid1 출력내용을 입력하세요. (Html지원됨)</description>
 		</var>
+		<var name="mid_1panel_on" type="select">
+			<title>판넬 Mid 1 처음 접기 / 펼치기</title>
+			<options value="">
+				<title>접기(기본)</title>
+			</options>
+			<options value="Y">
+				<title>펼치기</title>
+			</options>
+			<description>판넬 Mid 1을 처음부터 접기 / 펼치기 설정</description>
+		</var>
 		<var name="mid_2no" type="text">
 			<title>판넬 Mid 2</title>
 			<description>따로 내용을 작성할 mid2명</description>
@@ -80,6 +90,16 @@
 			<title>판넬 Mid 2 출력내용</title>
 			<description>판넬 mid2 출력내용을 입력하세요. (Html지원됨)</description>
 		</var>
+		<var name="mid_2panel_on" type="select">
+			<title>판넬 Mid 2 처음 접기 / 펼치기</title>
+			<options value="">
+				<title>접기(기본)</title>
+			</options>
+			<options value="Y">
+				<title>펼치기</title>
+			</options>
+			<description>판넬 Mid 2을 처음부터 접기 / 펼치기 설정</description>
+		</var>
 		<var name="mid_3no" type="text">
 			<title>판넬 Mid 3</title>
 			<description>따로 내용을 작성할 mid3명</description>
@@ -87,6 +107,16 @@
 		<var name="mid_3contents" type="textarea">
 			<title>판넬 Mid 3 출력내용</title>
 			<description>판넬 mid3 출력내용을 입력하세요. (Html지원됨)</description>
+		</var>
+		<var name="mid_3panel_on" type="select">
+			<title>판넬 Mid 3 처음 접기 / 펼치기</title>
+			<options value="">
+				<title>접기(기본)</title>
+			</options>
+			<options value="Y">
+				<title>펼치기</title>
+			</options>
+			<description>판넬 Mid 3을 처음부터 접기 / 펼치기 설정</description>
 		</var>
 	</extra_vars>
 </addon>

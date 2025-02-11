@@ -1,9 +1,8 @@
 {@ $ai = $mh_folding_panel; }
-<load target="css/style.css" />
 
 <!--@if($ai->toggle_form == 'H')-->
 	<div class="mh-folding-panel-wrapper">
-		<details class="mh-folding-panel" <!--@if($ai->panel_on =='Y')-->open<!--@end-->>
+		<details class="mh-folding-panel" data-panel-on="{$mh_folding_panel->panel_on}">
 			<summary class="mh-folding-header">
 				<span></span>
 			</summary>
