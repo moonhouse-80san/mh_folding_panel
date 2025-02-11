@@ -1,10 +1,11 @@
 <?php
 	/**
-	 * Mh Folding Panel Addon
+	 * @file mh_folding_panel.addon.php
+	 * @brief 게시판 상단 접이식 패널 애드온
 	 * @author 80san <80san@moonhouse.co.kr>
 	 * @license GPL-3.0-or-later
 	 * @link https://moonhouse.co.kr/xemy/597524
-	 */
+	 **/
 
 	if (!defined('RX_VERSION')) {
 		exit;
@@ -19,6 +20,9 @@
 	if ($called_position !== 'before_display_content') {
 		return;
 	}
+
+	// 현재 mid 가져오기
+	$current_mid = Context::get('mid');
 
 	// 애드온 설정 정리
 	$addon_info = (object)$addon_info;
@@ -35,21 +39,48 @@
 	$skin_path .= $skin_name;
 
 	// CSS, JS 파일 로드
-	Context::addCSSFile($skin_path . '/style.css');
-	Context::addJsFile($skin_path . '/folding.js');
+	Context::addCSSFile($skin_path . 'css/style.css');
+	Context::addJsFile($skin_path . 'js/folding.js');
 
 	// 변수 설정을 위한 객체 생성
 	$vars = new stdClass();
 
-	// HTML 내용과 토글 텍스트 설정
-	$vars->content = $addon_info->contact;
-	$vars->toggle1_text = $addon_info->toggle1_text ?: '더보기'; // 기본값 설정
-	$vars->toggle2_text = $addon_info->toggle2_text ?: '접기'; // 기본값 설정
-	$vars->toggle_form = $addon_info->toggle_form ?: 'H'; // 기본값 설정
-	$vars->panel_on = $addon_info->panel_on ?: ''; // 기본값 설정
-	$vars->top_panel_bcolor = $addon_info->top_panel_bcolor ?: 'transparent'; // 기본값 설정
-	$vars->top_panel_color = $addon_info->top_panel_color ?: '#444'; // 기본값 설정
-	$vars->top_panel_size = $addon_info->top_panel_size ?: '14px'; // 기본값 설정
+	// 게시판별 판넬 mid별 내용 설정
+	$mid_contents = array();
+	if (isset($addon_info->mid_contents) && is_string($addon_info->mid_contents)) {
+		$lines = explode("\n", trim($addon_info->mid_contents));
+		foreach ($lines as $line) {
+			$parts = explode('|', trim($line));
+			if (count($parts) >= 2) {
+				$mid = trim($parts[0]);
+				$content = trim($parts[1]);
+				$mid_contents[$mid] = $content;
+			}
+		}
+	}
+
+	// 지정 mid별 내용 설정
+	if (isset($addon_info->mid_1no) && isset($addon_info->mid_1contents)) {
+		$mid_contents[$addon_info->mid_1no] = $addon_info->mid_1contents;
+	}
+	if (isset($addon_info->mid_2no) && isset($addon_info->mid_2contents)) {
+		$mid_contents[$addon_info->mid_2no] = $addon_info->mid_2contents;
+	}
+	if (isset($addon_info->mid_3no) && isset($addon_info->mid_3contents)) {
+		$mid_contents[$addon_info->mid_3no] = $addon_info->mid_3contents;
+	}
+
+	// 현재 mid에 해당하는 내용이 있으면 사용, 없으면 기본 내용 사용
+	$vars->content = isset($mid_contents[$current_mid]) ? $mid_contents[$current_mid] : $addon_info->contact;
+
+	// 나머지 설정
+	$vars->toggle1_text = $addon_info->toggle1_text ?: '더보기';
+	$vars->toggle2_text = $addon_info->toggle2_text ?: '접기';
+	$vars->toggle_form = $addon_info->toggle_form ?: 'H';
+	$vars->panel_on = $addon_info->panel_on ?: '';
+	$vars->top_panel_bcolor = $addon_info->top_panel_bcolor ?: 'transparent';
+	$vars->top_panel_color = $addon_info->top_panel_color ?: '#444';
+	$vars->top_panel_size = $addon_info->top_panel_size ?: '14px';
 
 	// Context에 변수 설정
 	Context::set('mh_folding_panel', $vars);

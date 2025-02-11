@@ -57,5 +57,36 @@
 			</options>
 			<description>판넬을 처음부터 접기 / 펼치기</description>
 		</var>
+		<var name="mid_contents" type="textarea">
+			<title xml:lang="ko">게시판별 판넬 출력내용</title>
+			<description xml:lang="ko">• mid 내용 형식으로 한 줄씩 입력하세요. (Html지원됨)
+			• Html 작성시 게시판 내용은 한줄에 전부 작성해야 됩니다. 
+			board1|게시판1 내용 
+			board2|게시판2 내용</description>
+		</var>
+		<var name="mid_1no" type="text">
+			<title>판넬 Mid 1</title>
+			<description>따로 내용을 작성할 mid1명 (예 : board1)</description>
+		</var>
+		<var name="mid_1contents" type="textarea">
+			<title>판넬 Mid 1 출력내용</title>
+			<description>판넬 mid1 출력내용을 입력하세요. (Html지원됨)</description>
+		</var>
+		<var name="mid_2no" type="text">
+			<title>판넬 Mid 2</title>
+			<description>따로 내용을 작성할 mid2명</description>
+		</var>
+		<var name="mid_2contents" type="textarea">
+			<title>판넬 Mid 2 출력내용</title>
+			<description>판넬 mid2 출력내용을 입력하세요. (Html지원됨)</description>
+		</var>
+		<var name="mid_3no" type="text">
+			<title>판넬 Mid 3</title>
+			<description>따로 내용을 작성할 mid3명</description>
+		</var>
+		<var name="mid_3contents" type="textarea">
+			<title>판넬 Mid 3 출력내용</title>
+			<description>판넬 mid3 출력내용을 입력하세요. (Html지원됨)</description>
+		</var>
 	</extra_vars>
 </addon>
