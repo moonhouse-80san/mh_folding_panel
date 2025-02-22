@@ -12,15 +12,17 @@
 
 	<style>
 		.mh-folding-panel-wrapper summary.mh-folding-header::-webkit-details-marker { display:none; }
-		.mh-folding-panel-wrapper summary.mh-folding-header { display:block; }
-		.mh-folding-panel-wrapper summary.mh-folding-header { position:relative; padding-left:1.2em; cursor:pointer; }
-		.mh-folding-panel-wrapper summary.mh-folding-header::before { content:""; position:absolute; border-top:0.5em solid transparent; border-bottom:0.5em solid transparent; border-left:0.75em solid #ff6600; top:0.8em; left:0; transition:.25s transform; }
-		.mh-folding-panel-wrapper details[open] summary:before { transform:rotateZ(450deg); }
+		.mh-folding-panel-wrapper summary.mh-folding-header { display:block; position:relative; padding-left:1.2em;cursor:pointer; }
+		.mh-folding-panel-wrapper summary.mh-folding-header::before { content:""; position:absolute; border-top:0.5em solid transparent;border-bottom:0.5em solid transparent; border-left:0.75em solid #ff6600; top:0.8em; left:0; transition:.25s transform; }
+
+		/* 호버 시 화살표 회전 효과 추가 */
+		.mh-folding-panel-wrapper summary.mh-folding-header:hover::before { transform:rotateZ(360deg);}
+		.mh-folding-panel-wrapper details[open] summary:before {transform:rotateZ(450deg); }
 		.mh-folding-panel-wrapper details[open] > summary::-webkit-details-marker { transform:rotate3d(0, 0, 1, 180deg);}
 		.mh-folding-panel-wrapper details[open] > summary ~ * { animation:reveal 2s;}
-		@keyframes reveal {
-			from { opacity:0; transform:translate3d(0, -20px, 0); }
-			to { opacity:1; transform:translate3d(0, 0, 0); }
+		@keyframes reveal { 
+			from {opacity:0; transform:translate3d(0, -20px, 0);} 
+			to { opacity:1; transform:translate3d(0, 0, 0);}
 		}
 	</style>
 <!--@else-->

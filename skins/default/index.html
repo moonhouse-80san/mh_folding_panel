@@ -2,7 +2,7 @@
 
 <!--@if($ai->toggle_form == 'H')-->
 	<div class="mh-folding-panel-wrapper">
-		<details class="mh-folding-panel" data-panel-on="{$mh_folding_panel->panel_on}">
+		<details class="mh-folding-panel" data-panel-on="{$ai->panel_on}">
 			<summary class="mh-folding-header">
 				<span></span>
 			</summary>
@@ -11,25 +11,19 @@
 	</div>
 
 	<style type="text/css">
-		.mh-folding-panel-wrapper summary { position:relative; transition:all 0.3s ease; } 
-		.mh-folding-panel-wrapper summary::marker { content:"+ {$ai->toggle1_text} "; color:#ff6600; transition:transform 0.3s ease; }
-		.mh-folding-panel-wrapper summary:hover::marker { transform:rotate(450deg); display:inline-block; }
-		.mh-folding-panel-wrapper details[open] summary::marker { content:"️- {$ai->toggle2_text} "; color:#000; }
-		.mh-folding-panel-wrapper details[open] summary:before { transform:rotateZ(450deg); }
+		.mh-folding-panel-wrapper summary { position:relative; transition:all 0.3s ease;}
+		.mh-folding-panel-wrapper summary::marker { content:"▶ {$ai->toggle1_text}"; color:#444; transition:transform 0.3s ease; }
+
+		/* hover 효과 추가 */
+		.mh-folding-panel-wrapper summary:hover::marker { color:red; }
+		.mh-folding-panel-wrapper details[open] summary::marker { content:"▼ {$ai->toggle2_text}"; color:#000; }
+		.mh-folding-panel-wrapper details[open] summary:before {transform:rotateZ(450deg); }
 		.mh-folding-panel-wrapper details[open] > summary::-webkit-details-marker { transform:rotate3d(0, 0, 1, 180deg); }
 		.mh-folding-panel-wrapper details[open] > summary ~ * { animation:reveal 2s; }
 		@keyframes reveal { 
-			from { opacity:0; transform:translate3d(0, -20px, 0); } 
-			to { opacity:1; transform:translate3d(0, 0, 0); } 
+			from { opacity:0; transform:translate3d( 0, -20px, 0);
+			to { opacity:1; transform:translate3d( 0, 0, 0); }
 		}
-
-		/* 마커 회전 애니메이션을 위한 추가 스타일 */ 
-		@keyframes markerRotate { 
-			from { transform:rotate(0deg); } 
-			to { transform:rotate(450deg); } 
-		}
-		.mh-folding-panel-wrapper summary:hover { cursor:pointer; }
-		.mh-folding-panel-wrapper summary:hover::marker { animation:markerRotate 0.3s ease forwards; }
 	</style>
 <!--@else-->
 	<div class="mh-folding-panel-wrapper">
@@ -64,7 +58,7 @@
 			var header = document.querySelector('.mh-folding-header');
 			
 			if (content && header) {
-				content.style.display = '<!--@if($ai->panel_on =='Y')-->block<!--@else-->none<!--@end-->';
+				content.style.display = '<!--@if($ai->panel_on ==' Y')-->block<!--@else-->none<!--@end-->';
 				header.innerHTML = '▼ {$ai->toggle1_text}';
 			}
 		});
@@ -73,6 +67,7 @@
 
 <style type="text/css">
 	.mh-folding-content { background:{$ai->top_panel_bcolor}; color:{$ai->top_panel_color}; font-size:{$ai->top_panel_size}; }
+	.mh-folding-panel { <!--@if($ai->width_full =='')-->width:100%;<!--@end--> }
 	.mh-folding-content a,
 	.mh-folding-content span,
 	.mh-folding-content div { font-size:{$ai->top_panel_size}; }

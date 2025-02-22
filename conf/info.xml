@@ -2,130 +2,170 @@
 <addon version="0.2">
 	<title>Mh Folding Panel</title>
 	<description>게시판 상단에 접이식 패널을 추가하는 애드온입니다.</description>
-	<version>1.0</version>
-	<date>2025-02-10</date>
+	<version>1.2</version>
+	<date>2025-02-22</date>
 	<author email_address="80san@moonhouse.co.kr" link="https://moonhouse.co.kr/">
 		<name>80san</name>
 	</author>
 
-    <extra_vars>
-        <var name="contact" type="textarea">
-            <title xml:lang="ko">게시판 최상단 판넬 출력내용</title>
-            <description xml:lang="ko">폴딩 판넬 출력과 판넬안에 들어갈 문구나 이미지, 위젯을 넣어시면 됩니다.(Html지원됨)</description>
-        </var>
-        <var name="skin">
-            <title xml:lang="ko">스킨</title>
-            <description xml:lang="ko">출력 템플릿 (기본 값 : default)</description>
-        </var>
-        <var name="toggle1_text">
-            <title xml:lang="ko">접기 버턴문구</title>
-            <description xml:lang="ko">접기 버턴안 문구 작성(기본 값 : 더보기)</description>
-        </var>
-        <var name="toggle2_text">
-            <title xml:lang="ko">펼치기 버턴문구</title>
-            <description xml:lang="ko">펼치기 버턴안 문구 작성(기본 값 : 접기)</description>
-        </var>
-        <var name="top_panel_size" type="text">
-            <title>내용글 폰트 크기</title>
-            <description>판넬안에 들어갈 문구의 폰트 크기를 지정(기본 값 : 14px)</description>
-        </var>
-        <var name="top_panel_bcolor" type="text">
-            <title>배경색상</title>
-            <description>배경색상을 지정.(기본 값 : transparent(투명))</description>
-        </var>
-        <var name="top_panel_color" type="text">
-            <title>글색상</title>
-            <description>글색상을 지정.(기본 값 : #444)</description>
-        </var>
-        <var name="toggle_form" type="select">
-            <title xml:lang="ko">토글 형태</title>
-            <options value="H">
-                <title xml:lang="ko">Html</title>
-            </options>
-            <options value="J">
-                <title xml:lang="ko">자바 스크립트</title>
-            </options>
-            <description>판넬의 형태를 선택</description>
-        </var>
-        <var name="panel_on" type="select">
-            <title xml:lang="ko">기본 판넬 접기/펼치기</title>
-            <options value="">
-                <title xml:lang="ko">접기(기본)</title>
-            </options>
-            <options value="Y">
-                <title xml:lang="ko">펼치기</title>
-            </options>
-            <description>기본 판넬을 처음부터 접기/펼치기</description>
-        </var>
+	<extra_vars>
+		<var name="contact" type="textarea">
+			<title xml:lang="ko">📍게시판 최상단 판넬 출력내용</title>
+			<description xml:lang="ko">폴딩 판넬 출력과 판넬안에 들어갈 문구나 이미지, 위젯을 넣어시면 됩니다.(Html지원됨)</description>
+		</var>
+		<var name="skin">
+			<title xml:lang="ko">스킨</title>
+			<description xml:lang="ko">출력 템플릿 (기본 값 : default)</description>
+		</var>
+		<var name="toggle1_text">
+			<title xml:lang="ko">접기 버턴문구</title>
+			<description xml:lang="ko">접기 버턴안 문구 작성(기본 값 : 더보기)</description>
+		</var>
+		<var name="toggle2_text">
+			<title xml:lang="ko">펼치기 버턴문구</title>
+			<description xml:lang="ko">펼치기 버턴안 문구 작성(기본 값 : 접기)</description>
+		</var>
+		<var name="top_panel_size" type="text">
+			<title>내용글 폰트 크기</title>
+			<description>판넬안에 들어갈 문구의 폰트 크기를 지정(기본 값 : 14px)</description>
+		</var>
+		<var name="top_panel_bcolor" type="text">
+			<title>배경색상</title>
+			<description>배경색상을 지정.(기본 값 : transparent(투명))</description>
+		</var>
+		<var name="top_panel_color" type="text">
+			<title>글색상</title>
+			<description>글색상을 지정.(기본 값 : #444)</description>
+		</var>
+		<var name="toggle_form" type="select">
+			<title xml:lang="ko">토글 형태</title>
+			<options value="H">
+				<title xml:lang="ko">Html</title>
+			</options>
+			<options value="J">
+				<title xml:lang="ko">자바 스크립트</title>
+			</options>
+			<description>판넬의 형태를 선택</description>
+		</var>
+		<var name="panel_on" type="select">
+			<title xml:lang="ko">기본 판넬 접기/펼치기</title>
+			<options value="">
+				<title xml:lang="ko">접기(기본)</title>
+			</options>
+			<options value="Y">
+				<title xml:lang="ko">펼치기</title>
+			</options>
+			<description>기본 판넬을 처음부터 접기/펼치기</description>
+		</var>
+		<var name="width_full" type="select">
+			<title xml:lang="ko">판넬 넓이</title>
+			<options value="">
+				<title xml:lang="ko">100%(기본)</title>
+			</options>
+			<options value="N">
+				<title xml:lang="ko">글자 수 만큼</title>
+			</options>
+			<description>기본 판넬의 넚이 설정</description>
+		</var>
 		<var name="mid_contents" type="textarea">
-			<title xml:lang="ko">게시판별 판넬 출력내용</title>
+			<title xml:lang="ko">📍게시판별 판넬 출력내용</title>
 			<description xml:lang="ko">• mid 내용 형식으로 한 줄씩 입력하세요. (Html지원됨)
 			• Html 작성시 게시판 내용은 한줄에 전부 작성해야 됩니다. 
 			board1|게시판1 내용 
 			board2|게시판2 내용</description>
 		</var>
-        <var name="mid_1no" type="text">
-            <title xml:lang="ko">다른 판넬 mid1</title>
-            <description xml:lang="ko">따로 내용을 작성할 mid1명</description>
-        </var>
-        <var name="mid_1contents" type="textarea">
-            <title xml:lang="ko">다른 판넬 mid1 출력내용</title>
-            <description xml:lang="ko">다른 판넬 mid1 출력내용을 입력하세요. (Html지원됨)</description>
-        </var>
-        <var name="mid_1panel_on" type="select">
-            <title xml:lang="ko">mid1 판넬 접기/펼치기</title>
-            <options value="">
-                <title xml:lang="ko">기본값 사용</title>
-            </options>
-            <options value="Y">
-                <title xml:lang="ko">펼치기</title>
-            </options>
-            <options value="N">
-                <title xml:lang="ko">접기</title>
-            </options>
-            <description>mid1의 판넬 초기 상태 설정</description>
-        </var>
-        <var name="mid_2no" type="text">
-            <title xml:lang="ko">다른 판넬 mid2</title>
-            <description xml:lang="ko">따로 내용을 작성할 mid2명</description>
-        </var>
-        <var name="mid_2contents" type="textarea">
-            <title xml:lang="ko">다른 판넬 mid2 출력내용</title>
-            <description xml:lang="ko">다른 판넬 mid2 출력내용을 입력하세요. (Html지원됨)</description>
-        </var>
-        <var name="mid_2panel_on" type="select">
-            <title xml:lang="ko">mid2 판넬 접기/펼치기</title>
-            <options value="">
-                <title xml:lang="ko">기본값 사용</title>
-            </options>
-            <options value="Y">
-                <title xml:lang="ko">펼치기</title>
-            </options>
-            <options value="N">
-                <title xml:lang="ko">접기</title>
-            </options>
-            <description>mid2의 판넬 초기 상태 설정</description>
-        </var>
-        <var name="mid_3no" type="text">
-            <title xml:lang="ko">다른 판넬 mid3</title>
-            <description xml:lang="ko">따로 내용을 작성할 mid3명</description>
-        </var>
-        <var name="mid_3contents" type="textarea">
-            <title xml:lang="ko">다른 판넬 mid3 출력내용</title>
-            <description xml:lang="ko">다른 판넬 mid3 출력내용을 입력하세요. (Html지원됨)</description>
-        </var>
-        <var name="mid_3panel_on" type="select">
-            <title xml:lang="ko">mid3 판넬 접기/펼치기</title>
-            <options value="">
-                <title xml:lang="ko">기본값 사용</title>
-            </options>
-            <options value="Y">
-                <title xml:lang="ko">펼치기</title>
-            </options>
-            <options value="N">
-                <title xml:lang="ko">접기</title>
-            </options>
-            <description>mid3의 판넬 초기 상태 설정</description>
-        </var>
-    </extra_vars>
+		<var name="mid_1no" type="text">
+			<title xml:lang="ko">📍다른 판넬 mid1</title>
+			<description xml:lang="ko">따로 내용을 작성할 mid1명</description>
+		</var>
+		<var name="mid_1contents" type="textarea">
+			<title xml:lang="ko">다른 판넬 mid1 출력내용</title>
+			<description xml:lang="ko">다른 판넬 mid1 출력내용을 입력하세요. (Html지원됨)</description>
+		</var>
+		<var name="mid_1panel_on" type="select">
+			<title xml:lang="ko">mid1 판넬 접기/펼치기</title>
+			<options value="">
+				<title xml:lang="ko">기본값 사용</title>
+			</options>
+			<options value="Y">
+				<title xml:lang="ko">펼치기</title>
+			</options>
+			<options value="N">
+				<title xml:lang="ko">접기</title>
+			</options>
+			<description>mid1의 판넬 초기 상태 설정</description>
+		</var>
+		<var name="mid_1width_full" type="select">
+			<title xml:lang="ko">다른 판넬 mid1 넓이</title>
+			<options value="">
+				<title xml:lang="ko">100%(기본)</title>
+			</options>
+			<options value="N">
+				<title xml:lang="ko">글자 수 만큼</title>
+			</options>
+			<description>다른 판넬 mid1의 넚이 설정</description>
+		</var>
+		<var name="mid_2no" type="text">
+			<title xml:lang="ko">📍다른 판넬 mid2</title>
+			<description xml:lang="ko">따로 내용을 작성할 mid2명</description>
+		</var>
+		<var name="mid_2contents" type="textarea">
+			<title xml:lang="ko">다른 판넬 mid2 출력내용</title>
+			<description xml:lang="ko">다른 판넬 mid2 출력내용을 입력하세요. (Html지원됨)</description>
+		</var>
+		<var name="mid_2panel_on" type="select">
+			<title xml:lang="ko">mid2 판넬 접기/펼치기</title>
+			<options value="">
+				<title xml:lang="ko">기본값 사용</title>
+			</options>
+			<options value="Y">
+				<title xml:lang="ko">펼치기</title>
+			</options>
+			<options value="N">
+				<title xml:lang="ko">접기</title>
+			</options>
+			<description>mid2의 판넬 초기 상태 설정</description>
+		</var>
+		<var name="mid_2width_full" type="select">
+			<title xml:lang="ko">다른 판넬 mid2 넓이</title>
+			<options value="">
+				<title xml:lang="ko">100%(기본)</title>
+			</options>
+			<options value="N">
+				<title xml:lang="ko">글자 수 만큼</title>
+			</options>
+			<description>다른 판넬 mid2의 넚이 설정</description>
+		</var>
+		<var name="mid_3no" type="text">
+			<title xml:lang="ko">📍다른 판넬 mid3</title>
+			<description xml:lang="ko">따로 내용을 작성할 mid3명</description>
+		</var>
+		<var name="mid_3contents" type="textarea">
+			<title xml:lang="ko">다른 판넬 mid3 출력내용</title>
+			<description xml:lang="ko">다른 판넬 mid3 출력내용을 입력하세요. (Html지원됨)</description>
+		</var>
+		<var name="mid_3panel_on" type="select">
+			<title xml:lang="ko">mid3 판넬 접기/펼치기</title>
+			<options value="">
+				<title xml:lang="ko">기본값 사용</title>
+			</options>
+			<options value="Y">
+				<title xml:lang="ko">펼치기</title>
+			</options>
+			<options value="N">
+				<title xml:lang="ko">접기</title>
+			</options>
+			<description>mid3의 판넬 초기 상태 설정</description>
+		</var>
+		<var name="mid_3width_full" type="select">
+			<title xml:lang="ko">다른 판넬 mid3 넓이</title>
+			<options value="">
+				<title xml:lang="ko">100%(기본)</title>
+			</options>
+			<options value="N">
+				<title xml:lang="ko">글자 수 만큼</title>
+			</options>
+			<description>다른 판넬 mid3의 넚이 설정</description>
+		</var>
+	</extra_vars>
 </addon>

@@ -6,13 +6,16 @@
 	 * @license GPL-3.0-or-later
 	 * @link https://moonhouse.co.kr/xemy/597524
 	 **/
+
 	if (!defined('RX_VERSION')) {
 		exit;
 	}
+
 	// HTML 응답이 아니거나 관리자 페이지면 종료
 	if (Context::getResponseMethod() !== 'HTML' || Context::get('module') === 'admin') {
 		return;
 	}
+
 	// before_display_content 위치가 아니면 종료
 	if ($called_position !== 'before_display_content') {
 		return;
@@ -53,6 +56,7 @@
 				$mid_contents[$mid] = array(
 					'content' => $content,
 					'panel_on' => $addon_info->panel_on ?? '', // 기본값 사용
+					'width_full' => $addon_info->width_full ?? '', // 기본값 사용
 				);
 			}
 		}
@@ -61,17 +65,20 @@
 	// mid별 콘텐츠와 패널 상태 확인
 	$content = $addon_info->contact;
 	$panel_on = $addon_info->panel_on;
+	$width_full = $addon_info->width_full;
 
 	// 게시판별 설정된 내용이 있는지 확인
 	if (isset($mid_contents[$current_mid])) {
 		$content = $mid_contents[$current_mid]['content'];
 		$panel_on = $mid_contents[$current_mid]['panel_on'];
+		$width_full = $mid_contents[$current_mid]['width_full'];
 	}
 
 	for ($i = 1; $i <= 3; $i++) {
 		$mid_no = "mid_{$i}no";
 		$mid_contents = "mid_{$i}contents";
 		$mid_panel_on = "mid_{$i}panel_on";
+		$mid_width_full = "mid_{$i}width_full";
 		
 		if (isset($addon_info->$mid_no) && $addon_info->$mid_no === $current_mid) {
 			if (isset($addon_info->$mid_contents)) {
@@ -79,6 +86,9 @@
 			}
 			if (isset($addon_info->$mid_panel_on) && $addon_info->$mid_panel_on !== '') {
 				$panel_on = $addon_info->$mid_panel_on;
+			}
+			if (isset($addon_info->$mid_width_full) && $addon_info->$mid_width_full !== '') {
+				$width_full = $addon_info->$mid_width_full;
 			}
 			break;
 		}
@@ -89,6 +99,7 @@
 	$vars->toggle1_text = $addon_info->toggle1_text ?: '더보기';
 	$vars->toggle2_text = $addon_info->toggle2_text ?: '접기';
 	$vars->toggle_form = $addon_info->toggle_form ?: 'H';
+	$vars->width_full = $width_full;
 	$vars->panel_on = $panel_on;
 	$vars->top_panel_bcolor = $addon_info->top_panel_bcolor ?: 'transparent';
 	$vars->top_panel_color = $addon_info->top_panel_color ?: '#444';
@@ -104,7 +115,7 @@
 	// 본문 시작 부분에 삽입 (여러 패턴 시도)
 	$patterns = array(
 		'/<div[^>]*class="[^"]*board[^"]*"[^>]*>/i',
-		'/<div[^>]*class="[^"]*mhfold[^"]*"[^>]*>/i',
+		'/<div[^>]*id="[^"]*board[^"]*"[^>]*>/i',
 		'/<form[^>]*class="[^"]*mhfold[^"]*"[^>]*>/i',
 	);
 
